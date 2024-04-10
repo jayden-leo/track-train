@@ -1,4 +1,4 @@
-package com.jayden.track_tix.controller;
+package com.jayden.member.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
     @GetMapping("/test")
     public String hello(){
-        return "hello track_tix";
+        return "hello track_tix member";
     }
 }
