@@ -20,7 +20,7 @@ public class MemberApplication {
         SpringApplication app = new SpringApplication(MemberApplication.class);
         Environment env = app.run(args).getEnvironment();
         LOG.info("启动成功！！");
-        LOG.info("地址：http://127.0.0.1:{}",env.getProperty("server.port"));
+        LOG.info("地址：http://127.0.0.1:{}{}/test",env.getProperty("server.port"),env.getProperty("server.servlet.context-path"));
         // note：这里还可以打印项目的 LOGO、接口文档、项目说明书的地址等等
     }
 }
