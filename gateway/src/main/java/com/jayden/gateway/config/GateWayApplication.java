@@ -1,4 +1,4 @@
-package com.jayden.member.config;
+package com.jayden.gateway.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,15 +12,15 @@ import org.springframework.core.env.Environment;
  */
 @SpringBootApplication
 @ComponentScan("com.jayden")
-public class MemberApplication {
+public class GateWayApplication {
 
-    private static final Logger LOG = LoggerFactory.getLogger(MemberApplication.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GateWayApplication.class);
 
     public static void main(String[] args) {
-        SpringApplication app = new SpringApplication(MemberApplication.class);
+        SpringApplication app = new SpringApplication(GateWayApplication.class);
         Environment env = app.run(args).getEnvironment();
         LOG.info("启动成功！！");
-        LOG.info("地址：http://127.0.0.1:{}{}/test",env.getProperty("server.port"),env.getProperty("server.servlet.context-path"));
+        LOG.info("地址：http://127.0.0.1:{}",env.getProperty("server.port"));
         // note：这里还可以打印项目的 LOGO、接口文档、项目说明书的地址等等
     }
 }
