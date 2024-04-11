@@ -1,6 +1,8 @@
 package com.jayden.member.service;
 
 import cn.hutool.core.collection.CollUtil;
+import com.jayden.common.exception.BusinessException;
+import com.jayden.common.exception.BusinessExceptionEnum;
 import com.jayden.common.response.CommonResponse;
 import com.jayden.member.dao.Member;
 import com.jayden.member.dao.MemberExample;
@@ -36,15 +38,13 @@ public class MemberService {
         List<Member> list = memberMapper.selectByExample(memberExample);
         if (CollUtil.isNotEmpty(list)){
 //            return list.get(0).getId();
-            throw new RuntimeException("手机号已经注册了");
+            throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_EXIST);
         }
 
         Member member = new Member();
         member.setId(System.currentTimeMillis());
         member.setMobile(mobile);
         memberMapper.insert(member);
-        CommonResponse<Long> commonResponse = new CommonResponse<>();
-        commonResponse.setContent(member.getId());
-        return commonResponse;
+        return new CommonResponse<>(member.getId());
     }
 }

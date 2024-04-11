@@ -1,9 +1,6 @@
 package com.jayden.common.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * @ClassName: CommonResponse
@@ -30,4 +27,12 @@ public class CommonResponse<T> {
      * 返回泛型数据，自定义类型
      */
     private T content;
+
+
+
+    public CommonResponse(T content) {
+        this.content = content;
+    }
+
+
 }
