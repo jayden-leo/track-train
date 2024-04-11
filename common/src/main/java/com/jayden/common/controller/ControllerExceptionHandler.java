@@ -4,6 +4,7 @@ import com.jayden.common.exception.BusinessException;
 import com.jayden.common.response.CommonResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,7 +34,6 @@ public class ControllerExceptionHandler {
         LOG.error("系统异常: ",e);
         commonResponse.setSuccess(false);
         commonResponse.setMessage("系统出现异常，请联系管理员");
-//        commonResponse.setMessage(e.getMessage());
         return commonResponse;
     }
 
@@ -49,6 +49,21 @@ public class ControllerExceptionHandler {
         LOG.error("业务异常: {}",e.getAnEnum().getDesc());
         commonResponse.setSuccess(false);
         commonResponse.setMessage(e.getAnEnum().getDesc());
+        return commonResponse;
+    }
+
+    /**
+     * 业务异常处理
+     * @param e 业务异常
+     * @return 异常报告
+     */
+    @ExceptionHandler(value=MethodArgumentNotValidException.class)
+    @ResponseBody
+    public CommonResponse exceptionHandler(MethodArgumentNotValidException e){
+        CommonResponse<Object> commonResponse = new CommonResponse<>();
+        LOG.error("校验异常: {}",e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
+        commonResponse.setSuccess(false);
+        commonResponse.setMessage(e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
         return commonResponse;
     }
 }

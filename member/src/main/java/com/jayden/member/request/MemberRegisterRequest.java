@@ -1,5 +1,6 @@
 package com.jayden.member.request;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 /**
@@ -10,5 +11,6 @@ import lombok.Data;
  */
 @Data
 public class MemberRegisterRequest {
+    @NotBlank(message="【手机号】不能为空")
     private String mobile;
 }
