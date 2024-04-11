@@ -1,17 +1,31 @@
 package com.jayden.member.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jayden.member.dao.Member;
-import org.apache.ibatis.annotations.Mapper;
+import com.jayden.member.dao.MemberExample;
+import org.apache.ibatis.annotations.Param;
 
-/**
- * @ClassName: MemberMapper
- * @Author: 梁金德 Jayden
- * @Date: 2024-04-11 3:00
- * @Version: V1.0
- */
-@Mapper
-public interface MemberMapper extends BaseMapper<Member> {
+import java.util.List;
 
-    int count();
+public interface MemberMapper {
+    long countByExample(MemberExample example);
+
+    int deleteByExample(MemberExample example);
+
+    int deleteByPrimaryKey(Long id);
+
+    int insert(Member record);
+
+    int insertSelective(Member record);
+
+    List<Member> selectByExample(MemberExample example);
+
+    Member selectByPrimaryKey(Long id);
+
+    int updateByExampleSelective(@Param("record") Member record, @Param("example") MemberExample example);
+
+    int updateByExample(@Param("record") Member record, @Param("example") MemberExample example);
+
+    int updateByPrimaryKeySelective(Member record);
+
+    int updateByPrimaryKey(Member record);
 }

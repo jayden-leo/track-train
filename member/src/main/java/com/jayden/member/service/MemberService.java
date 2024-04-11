@@ -15,10 +15,9 @@ public class MemberService {
     @Resource
     private MemberMapper memberMapper;
 
-    public int count() {
+    public long count() {
 //        List<Member> members = memberMapper.selectList(null);
 //        return members.size();
-
-        return memberMapper.count();
+        return memberMapper.countByExample(null);
     }
 }
