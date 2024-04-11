@@ -1,11 +1,8 @@
 package com.jayden.member.service;
 
-import com.jayden.member.dao.Member;
 import com.jayden.member.mapper.MemberMapper;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * @ClassName: MemberService
@@ -19,7 +16,9 @@ public class MemberService {
     private MemberMapper memberMapper;
 
     public int count() {
-        List<Member> members = memberMapper.selectList(null);
-        return members.size();
+//        List<Member> members = memberMapper.selectList(null);
+//        return members.size();
+
+        return memberMapper.count();
     }
 }
