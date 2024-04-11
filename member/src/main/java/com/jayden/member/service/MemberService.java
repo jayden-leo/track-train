@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import com.jayden.common.exception.BusinessException;
 import com.jayden.common.exception.BusinessExceptionEnum;
 import com.jayden.common.response.CommonResponse;
+import com.jayden.common.util.SnowUtil;
 import com.jayden.member.dao.Member;
 import com.jayden.member.dao.MemberExample;
 import com.jayden.member.mapper.MemberMapper;
@@ -37,12 +38,11 @@ public class MemberService {
         memberExample.createCriteria().andMobileEqualTo(mobile);
         List<Member> list = memberMapper.selectByExample(memberExample);
         if (CollUtil.isNotEmpty(list)){
-//            return list.get(0).getId();
             throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_EXIST);
         }
 
         Member member = new Member();
-        member.setId(System.currentTimeMillis());
+        member.setId(SnowUtil.getSnowflakeNextId());
         member.setMobile(mobile);
         memberMapper.insert(member);
         return new CommonResponse<>(member.getId());
