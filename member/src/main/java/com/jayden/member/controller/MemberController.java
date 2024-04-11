@@ -1,8 +1,11 @@
 package com.jayden.member.controller;
 
+import com.jayden.common.response.CommonResponse;
+import com.jayden.member.request.MemberRegisterRequest;
 import com.jayden.member.service.MemberService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +22,12 @@ public class MemberController {
     private MemberService memberService;
 
     @GetMapping("/count")
-    public long count(){
+    public CommonResponse<Long> count(){
         return memberService.count();
+    }
+
+    @PostMapping("/register")
+    public CommonResponse<Long> register(MemberRegisterRequest memberRegisterRequest){
+        return memberService.register(memberRegisterRequest);
     }
 }
