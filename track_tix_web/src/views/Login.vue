@@ -40,11 +40,13 @@
  import { reactive } from 'vue';
  import axios from 'axios';
  import {notification} from 'ant-design-vue';
+ import {useRouter} from 'vue-router';
 
  const loginForm = reactive({
    mobile: '请输入手机号',
    code: '请输入验证码',
  });
+ const router = useRouter();
 
  const sendCode = () => {
    console.log('sendCode');
@@ -67,6 +69,8 @@
      let data = response.data;
      if (data.success){
        notification.success({description:'登录成功'});
+       // 登录成功，跳转到控台主页
+       router.push("/main");
      }else{
        notification.error({description:data.message});
      }
