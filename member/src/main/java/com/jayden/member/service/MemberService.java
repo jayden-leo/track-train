@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.RandomUtil;
+import cn.hutool.jwt.JWTUtil;
 import com.jayden.common.exception.BusinessException;
 import com.jayden.common.exception.BusinessExceptionEnum;
 import com.jayden.common.response.CommonResponse;
@@ -21,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName: MemberService
@@ -92,8 +94,12 @@ public class MemberService {
         if (!"8888".equals(code)){
             throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_CODE_ERROR);
         }
-
-        return BeanUtil.copyProperties(memberDB, MemberLoginResponse.class);
+        MemberLoginResponse memberLoginResponse = BeanUtil.copyProperties(memberDB, MemberLoginResponse.class);
+        Map<String, Object> map = BeanUtil.beanToMap(memberLoginResponse);
+        String key = "track-tix";
+        String token = JWTUtil.createToken(map, key.getBytes());
+        memberLoginResponse.setToken(token);
+        return memberLoginResponse;
     }
 
     private Member selectByMobile(String mobile) {
