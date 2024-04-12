@@ -48,7 +48,7 @@
 
  const sendCode = () => {
    console.log('sendCode');
-   axios.post("http://localhost:9000/member/member/send-code",{
+   axios.post("/member/member/send-code",{
      mobile: loginForm.mobile
    }).then(response => {
      let data = response.data;
@@ -62,7 +62,7 @@
  };
 
  const login = () => {
-   axios.post("http://localhost:9000/member/member/login",loginForm).then(response => {
+   axios.post("/member/member/login",loginForm).then(response => {
      console.log(response);
      let data = response.data;
      if (data.success){
