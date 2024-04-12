@@ -1,6 +1,12 @@
 <template>
   <a-layout-header class="header" id="components-layout-demo-top-side-2">
     <div class="logo" />
+    <div style="float:right; color:white;">
+      您好：{{member.mobile}} &nbsp; &nbsp;
+      <router-link to="/login">
+        退出登录
+      </router-link>
+    </div>
     <a-menu
         v-model:selectedKeys="selectedKeys1"
         theme="dark"
@@ -16,8 +22,16 @@
 
 <script setup>
 import {ref} from "vue";
+import { useMemberStore } from '@/store';
+
+// 可以在组件中的任意位置访问 `store` 变量 ✨
+const store = useMemberStore();
+let member = store.member;
 
 const selectedKeys1 = ref(['2']);
+// let member = useMemberStore().member;
+// console.log("member info: "+member)
+
 </script>
 
 <style scoped="scoped">

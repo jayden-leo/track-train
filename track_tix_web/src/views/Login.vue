@@ -41,15 +41,15 @@
  import axios from 'axios';
  import {notification} from 'ant-design-vue';
  import {useRouter} from 'vue-router';
+ import { useMemberStore } from '@/store/index.js'
 
  const loginForm = reactive({
-   mobile: '请输入手机号',
+   mobile: '17389889467',
    code: '请输入验证码',
  });
  const router = useRouter();
 
  const sendCode = () => {
-   console.log('sendCode');
    axios.post("/member/member/send-code",{
      mobile: loginForm.mobile
    }).then(response => {
@@ -65,12 +65,13 @@
 
  const login = () => {
    axios.post("/member/member/login",loginForm).then(response => {
-     console.log(response);
      let data = response.data;
      if (data.success){
        notification.success({description:'登录成功'});
        // 登录成功，跳转到控台主页
        router.push("/main");
+       const store = useMemberStore();
+       store.setMember(data.content);
      }else{
        notification.error({description:data.message});
      }
