@@ -1,14 +1,14 @@
 package com.jayden.member.controller;
 
 import com.jayden.common.response.CommonResponse;
+import com.jayden.member.request.MemberLoginRequest;
 import com.jayden.member.request.MemberRegisterRequest;
+import com.jayden.member.request.MemberSendCodeRequest;
+import com.jayden.member.response.MemberLoginResponse;
 import com.jayden.member.service.MemberService;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @ClassName: MemberController
@@ -30,5 +30,17 @@ public class MemberController {
     @PostMapping("/register")
     public CommonResponse<Long> register(@Valid MemberRegisterRequest memberRegisterRequest){
         return memberService.register(memberRegisterRequest);
+    }
+
+    @PostMapping("/send-code")
+    public CommonResponse<Long> sendCode(@Valid @RequestBody MemberSendCodeRequest memberSendCodeRequest){
+        memberService.sendCode(memberSendCodeRequest);
+        return new CommonResponse<>(); 
+    }
+
+    @PostMapping("/login")
+    public CommonResponse<MemberLoginResponse> login(@Valid @RequestBody MemberLoginRequest memberLoginRequest){
+        MemberLoginResponse memberLoginResponse = memberService.login(memberLoginRequest);
+        return new CommonResponse<>(memberLoginResponse);
     }
 }

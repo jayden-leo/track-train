@@ -5,13 +5,13 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 /**
- * @ClassName: MemberRegisterRequest
+ * @ClassName: MemberRegisterCodeRequest
  * @Author: 梁金德 Jayden
- * @Date: 2024-04-11 10:19
+ * @Date: 2024-04-11 18:33
  * @Version: V1.0
  */
 @Data
-public class MemberRegisterRequest {
+public class MemberSendCodeRequest {
     @NotBlank(message="【手机号】不能为空")
     @Pattern(regexp = "^1\\d{10}$",message = "【手机号】格式错误")
     private String mobile;

@@ -11,8 +11,11 @@ import lombok.Data;
  * @Version: V1.0
  */
 @Data
-public class MemberRegisterRequest {
+public class MemberLoginRequest {
     @NotBlank(message="【手机号】不能为空")
     @Pattern(regexp = "^1\\d{10}$",message = "【手机号】格式错误")
     private String mobile;
+
+    @NotBlank(message="【短信验证码】不能为空")
+    private String code;
 }
